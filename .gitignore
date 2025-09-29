@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -18,3 +17,17 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+# --- Ajouts Projet-8 ---
+
+# Docker
+/mysql_data/
+/phpmyadmin_data/
+/docker-compose.override.yaml
+
+# Node / Front
+/node_modules/
+
+# IDE / éditeurs
+/.idea/
+/.vscode/
