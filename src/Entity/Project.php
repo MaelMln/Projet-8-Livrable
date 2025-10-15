@@ -19,7 +19,7 @@ class Project
     private ?string $title = null;
 
     #[ORM\Column]
-    private ?bool $archived = null;
+    private ?bool $archived = false;
 
     /**
      * @var Collection<int, Employee>
@@ -113,7 +113,6 @@ class Project
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
             if ($task->getProject() === $this) {
                 $task->setProject(null);
             }

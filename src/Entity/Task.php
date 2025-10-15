@@ -25,6 +25,7 @@ class Task
 
     #[ORM\Column(length: 20)]
     private ?string $status = null;
+	//TODO: passer en Enum
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]

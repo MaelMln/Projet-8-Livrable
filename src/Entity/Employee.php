@@ -26,8 +26,9 @@ class Employee
 
     #[ORM\Column(length: 50)]
     private ?string $status = null;
+	//TODO: passer en Enum
 
-    #[ORM\Column]
+	#[ORM\Column]
     private ?\DateTimeImmutable $hiredAt = null;
 
     /**
@@ -161,7 +162,6 @@ class Employee
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
             if ($task->getAssignedTo() === $this) {
                 $task->setAssignedTo(null);
             }
