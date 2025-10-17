@@ -2,112 +2,110 @@
 
 namespace App\Entity;
 
+use App\Enum\TaskStatus;
 use App\Repository\TaskRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+	#[ORM\Column]
+	private ?int $id = null;
 
-    #[ORM\Column(length: 150)]
-    private ?string $title = null;
+	#[ORM\Column(length: 150)]
+	#[Assert\NotBlank]
+	private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+	#[ORM\Column(type: Types::TEXT, nullable: true)]
+	private ?string $description = null;
 
 	#[ORM\Column(nullable: true)]
 	private ?\DateTimeImmutable $deadline = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $status = null;
-	//TODO: passer en Enum
+	#[ORM\Column(enumType: TaskStatus::class)]
+	#[Assert\NotNull]
+	private ?TaskStatus $status = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tasks')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Project $project = null;
+	#[ORM\ManyToOne(inversedBy: 'tasks')]
+	#[ORM\JoinColumn(nullable: false)]
+	#[Assert\NotNull]
+	private ?Project $project = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tasks')]
-    private ?Employee $assignedTo = null;
+	#[ORM\ManyToOne(inversedBy: 'tasks')]
+	private ?Employee $assignedTo = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
+	public function getTitle(): ?string
+	{
+		return $this->title;
+	}
 
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
+	public function setTitle(string $title): static
+	{
+		$this->title = $title;
+		return $this;
+	}
 
-        return $this;
-    }
+	public function getDescription(): ?string
+	{
+		return $this->description;
+	}
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
+	public function setDescription(?string $description): static
+	{
+		$this->description = $description;
+		return $this;
+	}
 
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
+	public function getDeadline(): ?\DateTimeImmutable
+	{
+		return $this->deadline;
+	}
 
-        return $this;
-    }
+	public function setDeadline(?\DateTimeImmutable $deadline): static
+	{
+		$this->deadline = $deadline;
+		return $this;
+	}
 
-    public function getDeadline(): ?\DateTime
-    {
-        return $this->deadline;
-    }
+	public function getStatus(): ?TaskStatus
+	{
+		return $this->status;
+	}
 
-    public function setDeadline(?\DateTime $deadline): static
-    {
-        $this->deadline = $deadline;
+	public function setStatus(TaskStatus $status): static
+	{
+		$this->status = $status;
+		return $this;
+	}
 
-        return $this;
-    }
+	public function getProject(): ?Project
+	{
+		return $this->project;
+	}
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
+	public function setProject(?Project $project): static
+	{
+		$this->project = $project;
+		return $this;
+	}
 
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
+	public function getAssignedTo(): ?Employee
+	{
+		return $this->assignedTo;
+	}
 
-        return $this;
-    }
-
-    public function getProject(): ?Project
-    {
-        return $this->project;
-    }
-
-    public function setProject(?Project $project): static
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
-    public function getAssignedTo(): ?Employee
-    {
-        return $this->assignedTo;
-    }
-
-    public function setAssignedTo(?Employee $assignedTo): static
-    {
-        $this->assignedTo = $assignedTo;
-
-        return $this;
-    }
+	public function setAssignedTo(?Employee $assignedTo): static
+	{
+		$this->assignedTo = $assignedTo;
+		return $this;
+	}
 }

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés - TaskLinker{% endblock %}
+{% block page_title %}Équipe{% endblock %}
+
+{% block body %}
+	<table id="team-container">
+		<thead>
+		<tr>
+			<th>Prénom, Nom</th>
+			<th>Statut</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for e in employees %}
+			<tr>
+				<td>
+					<div class="employee-infos">
+						<div class="employee-avatar">{{ e.initials }}</div>
+						<div class="employee-coords">
+							<strong>{{ e.fullName }}</strong>
+							<span>{{ e.email }}</span>
+						</div>
+					</div>
+				</td>
+				<td>{{ e.status.value }}</td>
+				<td>
+					<a class="button button-edit-team" href="{{ path('app_employee_edit', {id: e.id}) }}">Éditer</a>
+					<form action="{{ path('app_employee_delete', {id: e.id}) }}" method="post" style="display:inline">
+						<input type="hidden" name="_token" value="{{ csrf_token('delete_employee_' ~ e.id) }}">
+						<button class="delete-team" style="background:none;border:none;cursor:pointer">Supprimer</button>
+					</form>
+				</td>
+			</tr>
+		{% else %}
+			<tr><td colspan="3">Aucun employé.</td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

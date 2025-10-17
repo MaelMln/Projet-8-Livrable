@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des projets - TaskLinker{% endblock %}
+{% block page_title %}Projets{% endblock %}
+
+{% block body %}
+	<div id="projects-container">
+		{% for project in projects %}
+			<article class="card-project">
+				<a href="{{ path('app_project_show', {id: project.id}) }}">
+					<h2>{{ project.title }}</h2>
+				</a>
+				<div class="card-project-icons">
+					<a href="{{ path('app_project_edit', {id: project.id}) }}"><i class="fa-solid fa-pen"></i></a>
+					<form action="{{ path('app_project_archive', {id: project.id}) }}" method="post" style="display:inline">
+						<input type="hidden" name="_token" value="{{ csrf_token('archive_project_' ~ project.id) }}">
+						<button type="submit" style="all:unset; cursor:pointer" title="Archiver">
+							<i class="fa-solid fa-trash"></i>
+						</button>
+					</form>
+				</div>
+			</article>
+		{% else %}
+			<p>Aucun projet actif.</p>
+		{% endfor %}
+
+		<article class="card-project">
+			<a href="{{ path('app_project_new') }}">
+				<i class="fa-solid fa-circle-plus add-project-icon"></i>
+				<h2>Ajouter un projet</h2>
+			</a>
+		</article>
+	</div>
+{% endblock %}
