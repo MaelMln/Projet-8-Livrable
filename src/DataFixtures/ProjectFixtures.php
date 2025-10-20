@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Project;
+use App\Entity\Employee;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -19,9 +20,9 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
 		$siteSoeurs = (new Project())->setTitle('Site vitrine Les Soeurs Marchand')->setArchived(false);
 		$archived   = (new Project())->setTitle('Ancien projet archivé')->setArchived(true);
 
-		$natalie = $this->getReference(EmployeeFixtures::EMP_NATALIE);
-		$demi    = $this->getReference(EmployeeFixtures::EMP_DEMI);
-		$marie   = $this->getReference(EmployeeFixtures::EMP_MARIE);
+		$natalie = $this->getReference(EmployeeFixtures::EMP_NATALIE, Employee::class );
+		$demi    = $this->getReference(EmployeeFixtures::EMP_DEMI, Employee::class);
+		$marie   = $this->getReference(EmployeeFixtures::EMP_MARIE, Employee::class);
 
 		$taskLinker->addMember($natalie)->addMember($demi);
 		$siteSoeurs->addMember($natalie)->addMember($marie);

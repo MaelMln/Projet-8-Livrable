@@ -2,7 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Employee;
 use App\Entity\Task;
+use App\Entity\Project;
 use App\Enum\TaskStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -12,11 +14,11 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
 {
 	public function load(ObjectManager $manager): void
 	{
-		$taskLinker = $this->getReference(ProjectFixtures::PROJ_TASKLINKER);
-		$siteSoeurs = $this->getReference(ProjectFixtures::PROJ_SOEURS);
+		$taskLinker = $this->getReference(ProjectFixtures::PROJ_TASKLINKER, Project::class);
+		$siteSoeurs = $this->getReference(ProjectFixtures::PROJ_SOEURS, Project::class);
 
-		$natalie = $this->getReference(EmployeeFixtures::EMP_NATALIE);
-		$demi    = $this->getReference(EmployeeFixtures::EMP_DEMI);
+		$natalie = $this->getReference(EmployeeFixtures::EMP_NATALIE, Employee::class);
+		$demi    = $this->getReference(EmployeeFixtures::EMP_DEMI, Employee::class);
 
 		$t1 = (new Task())
 			->setProject($taskLinker)
