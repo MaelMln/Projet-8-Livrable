@@ -19,17 +19,20 @@ class Employee
 	#[ORM\Column]
 	private ?int $id = null;
 
-	#[ORM\Column(length: 100)]
+	#[ORM\Column(length: 50)]
 	#[Assert\NotBlank]
+	#[Assert\Length(max: 50)]
 	private ?string $firstName = null;
 
-	#[ORM\Column(length: 100)]
+	#[ORM\Column(length: 50)]
 	#[Assert\NotBlank]
+	#[Assert\Length(max: 50)]
 	private ?string $lastName = null;
 
-	#[ORM\Column(length: 180, unique: true)]
+	#[ORM\Column(length: 100, unique: true)]
 	#[Assert\NotBlank]
 	#[Assert\Email]
+	#[Assert\Length(max: 100)]
 	private ?string $email = null;
 
 	#[ORM\Column(enumType: EmployeeStatus::class)]
@@ -38,6 +41,7 @@ class Employee
 
 	#[ORM\Column]
 	#[Assert\NotNull]
+	#[Assert\LessThanOrEqual('today')]
 	private ?\DateTimeImmutable $hiredAt = null;
 
 	/**

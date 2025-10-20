@@ -16,8 +16,9 @@ class Project
 	#[ORM\Column]
 	private ?int $id = null;
 
-	#[ORM\Column(length: 150)]
+	#[ORM\Column(length: 100)]
 	#[Assert\NotBlank]
+	#[Assert\Length(max: 100)]
 	private ?string $title = null;
 
 	#[ORM\Column]

@@ -16,11 +16,13 @@ class Task
 	#[ORM\Column]
 	private ?int $id = null;
 
-	#[ORM\Column(length: 150)]
+	#[ORM\Column(length: 100)]
 	#[Assert\NotBlank]
+	#[Assert\Length(max: 100)]
 	private ?string $title = null;
 
 	#[ORM\Column(type: Types::TEXT, nullable: true)]
+	#[Assert\Length(max: 1000)]
 	private ?string $description = null;
 
 	#[ORM\Column(nullable: true)]
@@ -32,7 +34,6 @@ class Task
 
 	#[ORM\ManyToOne(inversedBy: 'tasks')]
 	#[ORM\JoinColumn(nullable: false)]
-	#[Assert\NotNull]
 	private ?Project $project = null;
 
 	#[ORM\ManyToOne(inversedBy: 'tasks')]

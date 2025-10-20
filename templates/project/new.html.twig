@@ -5,9 +5,8 @@
 
 {% block body %}
 	{{ form_start(form) }}
-	{{ form_row(form.title, { label: 'Titre du projet' }) }}
-	{{ form_row(form.members, { label: 'Inviter des membres' }) }}
-	<br>
+	{{ form_row(form.title) }}
+	{{ form_row(form.members) }}
 	<button class="button button-submit">Continuer</button>
 	{{ form_end(form) }}
 {% endblock %}

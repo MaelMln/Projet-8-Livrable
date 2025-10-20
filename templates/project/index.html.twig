@@ -12,9 +12,9 @@
 				</a>
 				<div class="card-project-icons">
 					<a href="{{ path('app_project_edit', {id: project.id}) }}"><i class="fa-solid fa-pen"></i></a>
-					<form action="{{ path('app_project_archive', {id: project.id}) }}" method="post" style="display:inline">
+					<form action="{{ path('app_project_archive', {id: project.id}) }}" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token('archive_project_' ~ project.id) }}">
-						<button type="submit" style="all:unset; cursor:pointer" title="Archiver">
+						<button type="submit" class="icon-button" title="Archiver">
 							<i class="fa-solid fa-trash"></i>
 						</button>
 					</form>

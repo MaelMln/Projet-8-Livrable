@@ -15,20 +15,22 @@ class ProjectType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options): void
 	{
 		$builder
-			->add('title', TextType::class, ['label' => 'Titre du projet'])
+			->add('title', TextType::class, [
+				'label' => 'Titre du projet',
+			])
 			->add('members', EntityType::class, [
+				'label' => 'Inviter des membres',
 				'class' => Employee::class,
 				'choice_label' => fn(Employee $e) => $e->getFullName(),
 				'multiple' => true,
 				'required' => false,
-				'label' => 'Inviter des membres',
+				'by_reference' => false,
+				'attr' => ['data-controller' => 'select2'],
 			]);
 	}
 
 	public function configureOptions(OptionsResolver $resolver): void
 	{
-		$resolver->setDefaults([
-			'data_class' => Project::class,
-		]);
+		$resolver->setDefaults(['data_class' => Project::class]);
 	}
 }

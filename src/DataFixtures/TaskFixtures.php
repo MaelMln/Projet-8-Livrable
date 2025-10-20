@@ -2,47 +2,21 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Employee;
-use App\Entity\Project;
 use App\Entity\Task;
-use App\Enum\EmployeeStatus;
 use App\Enum\TaskStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AppFixtures extends Fixture
+class TaskFixtures extends Fixture implements DependentFixtureInterface
 {
 	public function load(ObjectManager $manager): void
 	{
-		$natalie = (new Employee())
-			->setFirstName('Natalie')->setLastName('Dillon')
-			->setEmail('natalie@driblet.com')->setStatus(EmployeeStatus::CDI)
-			->setHiredAt(new \DateTimeImmutable('2019-06-14'));
+		$taskLinker = $this->getReference(ProjectFixtures::PROJ_TASKLINKER);
+		$siteSoeurs = $this->getReference(ProjectFixtures::PROJ_SOEURS);
 
-		$demi = (new Employee())
-			->setFirstName('Demi')->setLastName('Baker')
-			->setEmail('demi@driblet.com')->setStatus(EmployeeStatus::CDD)
-			->setHiredAt(new \DateTimeImmutable('2021-02-10'));
-
-		$marie = (new Employee())
-			->setFirstName('Marie')->setLastName('Dupont')
-			->setEmail('marie@driblet.com')->setStatus(EmployeeStatus::FREELANCE)
-			->setHiredAt(new \DateTimeImmutable('2023-01-05'));
-
-		$manager->persist($natalie);
-		$manager->persist($demi);
-		$manager->persist($marie);
-
-		$taskLinker = (new Project())->setTitle('TaskLinker')->setArchived(false);
-		$siteSoeurs = (new Project())->setTitle('Site vitrine Les Soeurs Marchand')->setArchived(false);
-		$archived = (new Project())->setTitle('Ancien projet archivé')->setArchived(true);
-
-		$taskLinker->addMember($natalie)->addMember($demi);
-		$siteSoeurs->addMember($natalie)->addMember($marie);
-
-		$manager->persist($taskLinker);
-		$manager->persist($siteSoeurs);
-		$manager->persist($archived);
+		$natalie = $this->getReference(EmployeeFixtures::EMP_NATALIE);
+		$demi    = $this->getReference(EmployeeFixtures::EMP_DEMI);
 
 		$t1 = (new Task())
 			->setProject($taskLinker)
@@ -84,5 +58,10 @@ class AppFixtures extends Fixture
 		}
 
 		$manager->flush();
+	}
+
+	public function getDependencies(): array
+	{
+		return [ProjectFixtures::class, EmployeeFixtures::class];
 	}
 }

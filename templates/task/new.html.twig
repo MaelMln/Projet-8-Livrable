@@ -5,14 +5,13 @@
 
 {% block body %}
 	{{ form_start(form) }}
-	{{ form_row(form.title, { label: 'Titre de la tâche' }) }}
-	{{ form_row(form.description, { label: 'Description' }) }}
-	<div class="flex-form">
-		<div>{{ form_row(form.deadline, { label: 'Date' }) }}</div>
-		<div>{{ form_row(form.status, { label: 'Statut' }) }}</div>
+	{{ form_row(form.title) }}
+	{{ form_row(form.description) }}
+	<div class="form-flex">
+		<div>{{ form_row(form.deadline) }}</div>
+		<div>{{ form_row(form.status) }}</div>
 	</div>
-	{{ form_row(form.assignedTo, { label: 'Membre' }) }}
-	<br>
+	{{ form_row(form.assignedTo) }}
 	<button class="button button-submit">Ajouter</button>
 	{{ form_end(form) }}
 {% endblock %}

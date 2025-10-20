@@ -529,3 +529,54 @@ form .select2-container--default .select2-selection--multiple .select2-selection
 		padding: 13px;
 	}
 }
+
+.btn-reset {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	color: inherit;
+	font: inherit;
+}
+
+button.delete-team {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	font: inherit;
+	color: #E14343;
+}
+
+.icon-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+.flash {
+	margin-bottom: 15px;
+	padding: 10px 12px;
+	border-radius: 6px;
+	font-size: 14px;
+}
+
+.flash-success {
+	background: #e9f8ec;
+	color: #1c5b50;
+	border: 1px solid #B1D89D;
+}
+
+.flash-error {
+	background: #fdeaea;
+	color: #8b1c1c;
+	border: 1px solid #E14343;
+}
+
+.flash-warning {
+	background: #fff7e6;
+	color: #8a6d3b;
+	border: 1px solid #ffd27a;
+}
