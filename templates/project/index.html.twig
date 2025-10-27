@@ -15,7 +15,7 @@
 					<form action="{{ path('app_project_archive', {id: project.id}) }}" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token('archive_project_' ~ project.id) }}">
 						<button type="submit" class="icon-button" title="Archiver">
-							<i class="fa-solid fa-trash"></i>
+							<i class="fa-solid fa-archive"></i>
 						</button>
 					</form>
 				</div>
