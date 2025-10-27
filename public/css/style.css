@@ -168,6 +168,11 @@ div#projects-container {
 	color: #4D8077;
 }
 
+.card-project-icons form {
+	width: auto;
+	display: inline;
+}
+
 .add-project-icon {
 	margin-bottom: 5px;
 }
@@ -406,7 +411,7 @@ form input, form select, form textarea {
 	border-radius: 4px;
 }
 
-form {
+form.entity-form {
 	width: 320px;
 }
 
