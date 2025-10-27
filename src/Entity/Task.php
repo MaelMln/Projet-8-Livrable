@@ -37,6 +37,7 @@ class Task
 	private ?Project $project = null;
 
 	#[ORM\ManyToOne(inversedBy: 'tasks')]
+	#[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
 	private ?Employee $assignedTo = null;
 
 	public function getId(): ?int
