@@ -47,6 +47,7 @@ class TaskType extends AbstractType
 				'choices' => $memberChoices,
 				'placeholder' => '',
 				'required' => false,
+				'choice_label' => 'fullName',
 			]);
 	}
 
