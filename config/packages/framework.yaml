@@ -12,6 +12,10 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
+    # Property Info configuration (Symfony 7.4+)
+    property_info:
+        with_constructor_extractor: true
+
     #esi: true
     #fragments: true
     php_errors:

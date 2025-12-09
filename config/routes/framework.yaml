@@ -1,4 +1,2 @@
-when@dev:
-    _errors:
-        resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
-        prefix: /_error
+# Symfony 7.4 no longer requires error routing configuration
+# The error pages are handled automatically by the framework
